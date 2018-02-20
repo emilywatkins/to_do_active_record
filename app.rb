@@ -29,11 +29,11 @@ get('/lists') do
   erb(:lists)
 end
 
-# get("/lists/:id") do # route to view a specific list
-#   @list = List.find(params.fetch("id").to_i())
-#   erb(:list)
-# end
-#
+get("/lists/:id") do # route to view a specific list
+  @list = List.find(params.fetch("id").to_i())
+  erb(:list)
+end
+
 # post("/tasks") do
 #   description = params.fetch("description")
 #   list_id = params.fetch("list_id").to_i()
