@@ -10,6 +10,7 @@ require("pg")
 DB = PG.connect({:dbname => "to_do_test"}) # change back to above when done testing
 
 get('/') do
+  @lists = List.all()
   erb(:index)
 end
 
@@ -29,7 +30,8 @@ get('/lists') do
   erb(:lists)
 end
 
-get("/lists/:id") do # route to view a specific list
+get("/lists/:id") do
+  @tasks = Task.all()
   @list = List.find(params.fetch("id").to_i())
   erb(:list)
 end
