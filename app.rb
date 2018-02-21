@@ -42,6 +42,7 @@ post("/tasks") do
   @list = List.find(list_id)
   @task = Task.new({:description => description, :list_id => list_id})
   @task.save()
+  @tasks = Task.all()
   erb(:list)
 end
 
@@ -56,4 +57,11 @@ patch("/lists/:id") do
   @list.update({:name => name})
   @tasks = Task.all()
   erb(:list)
+end
+
+delete("/lists/:id") do
+  @list = List.find(params.fetch("id").to_i())
+  @list.delete()
+  @lists = List.all()
+  erb(:index)
 end
