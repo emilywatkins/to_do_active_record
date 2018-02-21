@@ -18,7 +18,7 @@ describe(List) do
     it("sets its ID when you save it") do
       list = List.new({:name => "Epicodus stuff", :id => nil})
       list.save()
-      expect(list.id()).to(be_an_instance_of(Integer)) # don't know what specific ID the database will assign it, so all we can do is check to make sure the ID is an Integer.
+      expect(list.id()).to(be_an_instance_of(Fixnum))
     end
   end
 
@@ -57,6 +57,15 @@ describe(List) do
       test_task2 = Task.new({:description => "Review Ruby", :list_id => test_list.id()})
       test_task2.save()
       expect(test_list.tasks()).to(eq([test_task, test_task2]))
+    end
+  end
+
+  describe("#update") do
+    it("lets you update lists in the database") do
+      list = List.new({:name => "Epicodus stuff", :id => nil})
+      list.save()
+      list.update({:name => "Homework stuff"})
+      expect(list.name()).to(eq("Homework stuff"))
     end
   end
 end
