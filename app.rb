@@ -13,9 +13,11 @@ end
 
 post('/tasks') do
   description = params['description']
-  task = Task.new({:description => description})
-  task.save
-  erb(:success)
+  @task = Task.new({:description => description, :done => false})
+  if @task.save
+    erb(:success)
+  else
+    erb(:errors)
 end
 
 get('/tasks/:id/edit') do
