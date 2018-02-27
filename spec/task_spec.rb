@@ -1,6 +1,12 @@
 require("spec_helper")
 
 describe(Task) do
+
+  it("validates presence of description") do
+    task = Task.new({:description => ""})
+    expect(task.save()).to(eq(false))
+  end
+
   describe(".not_done") do # scope -> block
     it("returns the not done tasks") do
       not_done_task1 = Task.create({:description => "gotta do it", :done => false})
