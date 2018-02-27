@@ -2,6 +2,11 @@ require("spec_helper")
 
 describe(Task) do
 
+  it("ensures the length of description is at most 50 characters") do
+    task = Task.new({:description => "a".*(51)})
+    expect(task.save()).to(eq(false))
+  end
+
   it("validates presence of description") do
     task = Task.new({:description => ""})
     expect(task.save()).to(eq(false))
